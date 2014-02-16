@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GMYND Tests</title>
+  <meta charset="utf8">
+  <link rel="stylesheet" type="text/css" href="../Gmynd.Style.Core.css">
+  <script type="text/javascript" src="../Gmynd.Core.js"></script>
+  <script type="text/javascript" src="../Gmynd.Animation.js"></script>
+  <script type="text/javascript" src="../Gmynd.Mouse.js"></script>
+</head>
+<body>
+
+
+<script type="text/javascript">
+  var G = Gmynd;
+  var rect = G.Shape.rectangle(20, 50, 200, 100);
+  
+  G.Animation.behavior(function(fc) {
+    rect.width = Math.abs( Math.sin(fc/10) * 200 );
+  });
+</script>
+</body>
+</html>
