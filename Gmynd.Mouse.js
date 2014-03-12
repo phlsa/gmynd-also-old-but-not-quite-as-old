@@ -17,9 +17,16 @@
   });
   // Global click handlers
   document.addEventListener('mousedown', function(e) {
-    G.Mouse.leftButtonDown = true;
+    if (e.buttons === 1)
+      G.Mouse.leftButtonDown = true;
+    else if (e.buttons === 2)
+      G.Mouse.rightButtonDown = true;
+    else if (e.buttons === 3)
+      G.Mouse.middleButtonDown = true;
   });
   document.addEventListener('mouseup', function(e) {
     G.Mouse.leftButtonDown = false;
+    G.Mouse.rightButtonDown = false;
+    G.Mouse.middleButtonDown = false;
   })
 })();
