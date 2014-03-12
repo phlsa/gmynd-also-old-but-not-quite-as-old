@@ -17,10 +17,50 @@ window.Gmynd = (function() {
         get style() { return nativeElement.style },
         get addEventListener() { return nativeElement.addEventListener },
         get removeEventListener() { return nativeElement.removeEventListener },
-        get width() { return parseInt(nativeElement.style.width.split('px')[0]) },
-        set width(w) { nativeElement.style.width = w+'px' },
-        get height() { return parseInt(nativeElement.style.height.split('px')[0]) },
-        set height(h) { nativeElement.style.height = h+'px' }
+        get width()   { return parseInt(nativeElement.style.width.split('px')[0]) },
+        set width(w)  { nativeElement.style.width = w+'px' },
+        get height()  { return parseInt(nativeElement.style.height.split('px')[0]) },
+        set height(h) { nativeElement.style.height = h+'px' },
+
+        // coordinates to bypass transforms
+        transformCoordinates: {
+          x: 0,
+          y: 0,
+          rotationX: 0,
+          rotationY: 0,
+          rotationZ: 0,
+          scaleX: 1,
+          scaleY: 1
+        },
+        // calculate transform based on transformCoordinates
+        recalculateTransform: function() {
+          var t = this.transformCoordinates;
+          nativeElement.style.transform = "translate("+t.x+"px, "+t.y+"px) "+
+                                          "rotateX("+t.rotationX+"deg )" +
+                                          "rotateY("+t.rotationY+"deg) " +
+                                          "rotateZ("+t.rotationZ+"deg) " +
+                                          "scale("+t.scaleX+", "+t.scaleY+")";
+        },
+
+        // magic properties
+        set x(_x)        { this.transformCoordinates.x = _x; this.recalculateTransform() },
+        get x()          { return this.transformCoordinates.x },
+        set y(_y)        { this.transformCoordinates.y = _y; this.recalculateTransform() },
+        get y()          { return this.transformCoordinates.y },
+        set rotationX(r) { this.transformCoordinates.rotationX = r; this.recalculateTransform() },
+        get rotationX()  { return this.transformCoordinates.rotationX },
+        set rotationY(r) { this.transformCoordinates.rotationY = r; this.recalculateTransform() },
+        get rotationY()  { return this.transformCoordinates.rotationY },
+        set rotationZ(r) { this.transformCoordinates.rotationZ = r; this.recalculateTransform() },
+        get rotationZ()  { return this.transformCoordinates.rotationZ },
+        set scaleX(s)    { this.transformCoordinates.scaleX = s; this.recalculateTransform() },
+        get scaleX()     { return this.transformCoordinates.scaleX },
+        set scaleY(s)    { this.transformCoordinates.scaleY = s; this.recalculateTransform() },
+        get scaleY()     { return this.transformCoordinates.scaleY },
+        set rotation(r)  { this.rotationZ = r },
+        get rotation()   { return this.rotationZ },
+        set scale(s)     { this.scaleX = this.scaleY = s },
+        get scale()      { return this.scaleX }
       }
       return elem;
     },

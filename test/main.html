@@ -16,7 +16,11 @@
   var rect = G.Shape.rectangle(20, 50, 200, 100);
   
   G.Animation.behavior(function(fc) {
-    rect.width = Math.abs( Math.sin(fc/10) * 200 );
+    //rect.width = Math.abs( Math.sin(fc/10) * 200 );
+    rect.x = G.Mouse.position.x;
+    rect.y = G.Mouse.position.y;
+    rect.rotation = G.Mouse.position.x;
+    rect.scale = G.Mouse.position.x / window.innerWidth;
   });
 </script>
 </body>
