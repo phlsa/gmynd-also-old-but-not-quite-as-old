@@ -5,6 +5,10 @@
       x: 0,
       y: 0
     },
+    previousPosition: {
+      x: 0,
+      y: 0
+    },
     leftButtonDown: false,
     rightButtonDown: false,
     middleButtonDown: false
@@ -12,6 +16,8 @@
 
   // Update the mouse position whenever the mouse is being moved
   document.addEventListener('mousemove', function(e) {
+    G.Mouse.previousPosition.x = G.Mouse.position.x;
+    G.Mouse.previousPosition.y = G.Mouse.position.y;
     G.Mouse.position.x = e.clientX;
     G.Mouse.position.y = e.clientY;
   });
