@@ -79,18 +79,39 @@ window.Gmynd = (function() {
       rectangle: function(x, y, width, height, options) {
         var r = document.createElement('div');
         r.classList.add('g-basic');
-        r.style.transform = 'translate(' + x + 'px,' + y + 'px)';
         r.style.width = width + 'px';
         r.style.height = height + 'px';
         document.body.appendChild(r);
         r = G.wrapSingle(r);
+        r.x = x;
+        r.y = y;
         return r;
       }
 
+    },
+
+    // Collections
+    Collection: function(n, fn) {
+      var coll = [];
+      for (var i=0; i<n; i++) {
+        coll[i] = fn(i);
+      }
+      return coll;
+    },
+
+    // Initialization
+    initialize: function() {
+      // Center the perspective origin whenever the window is resized
+      document.body.style.perspectiveOrigin = window.innerWidth/2 + "px " + window.innerHeight/2 + "px";
+      window.addEventListener('resize', function() {
+        document.body.style.perspectiveOrigin = window.innerWidth/2 + "px " + window.innerHeight/2 + "px";
+      });
     }
 
-
   }
+
+  // TODO: Better listener for calling initialize
+  window.setTimeout(G.initialize, 1000);
 
   return G;
 })()

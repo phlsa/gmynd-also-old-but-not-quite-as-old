@@ -13,14 +13,16 @@
 
 <script type="text/javascript">
   var G = Gmynd;
-  var rect = G.Shape.rectangle(20, 50, 200, 100);
+  var coll = G.Collection(20, function(n) {
+    return G.Shape.rectangle(100+n*50, 100, 100, 100)
+  });
   
   G.Animation.behavior(function(fc) {
-    //rect.width = Math.abs( Math.sin(fc/10) * 200 );
-    rect.x = G.Mouse.position.x;
-    rect.y = G.Mouse.position.y;
-    rect.rotation = G.Mouse.position.x;
-    rect.scale = G.Mouse.position.x / window.innerWidth;
+    coll.forEach(function(rect, i) {
+      rect.rotationY = G.Mouse.position.x+i*3;
+      //rect.rotationX = G.Mouse.position.y;
+      //rect.scaleY = G.Mouse.position.x / window.innerWidth;
+    });
   });
 </script>
 </body>
